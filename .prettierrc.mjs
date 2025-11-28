@@ -14,7 +14,7 @@ export default {
   bracketSameLine: false,
   tailwindFunctions: ["cn"],
   customFunctions: [
-    // Nicer
+    //
     "cn",
     "cva",
   ],
@@ -33,8 +33,9 @@ export default {
     "@xeonlink/prettier-plugin-organize-attributes",
     "prettier-plugin-multiline-arrays",
     "prettier-plugin-organize-imports",
-    "prettier-plugin-classnames",
     "prettier-plugin-brace-style",
     "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge",
   ],
 };

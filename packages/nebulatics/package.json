@@ -4,6 +4,7 @@
   "private": false,
   "license": "MIT",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": {
         "types": "./dist/index.d.mts",
@@ -15,18 +16,20 @@
       }
     }
   },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "dependencies": {
+    "fumadb": "^0.2.1"
+  },
+  "devDependencies": {
+    "@nebulatics/typescript-config": "workspace:*",
+    "tsdown": "^0.16.8",
+    "typescript": "5.9.2"
+  },
   "peerDependencies": {
     "next": "^14.0.0 || ^15.0.0 || ^16.0.0",
     "react": "^18.0.0 || ^19.0.0"
-  },
-  "scripts": {
-    "dev": "tsdown --watch",
-    "build": "tsdown"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "tsdown": "^0.16.8",
-    "typescript": "5.9.2",
-    "@nebulatics/typescript-config": "workspace:*"
   }
 }
