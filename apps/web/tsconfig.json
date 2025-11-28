@@ -1,5 +1,4 @@
 {
-  "extends": "@nebulatics/typescript-config/nextjs.json",
   "compilerOptions": {
     "plugins": [
       {
@@ -7,14 +6,15 @@
       }
     ]
   },
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "@nebulatics/typescript-config/nextjs.json",
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    "next.config.js",
+    "next.config.ts",
     ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
   ]
 }
