@@ -1,7 +1,7 @@
 import { getURLFromRedirectError } from "next/dist/client/components/redirect";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { redirect } from "next/navigation";
-import { connection } from "next/server";
+import { connection, NextResponse } from "next/server";
 
 interface Authentication {
   (): Promise<void>;
@@ -67,16 +67,17 @@ export function DashboardPage({
     const pageParams = (await params) || {};
     const pageSearchParams = (await searchParams) || {};
     const normalizedBasePath = basePath.replace(/^\//, "");
-    const pathname =
-      normalizedBasePath in pageParams
-        ? (pageParams as any)?.[normalizedBasePath]?.join("/") || "/"
+    const segments = "segments";
+    let pathname =
+      segments in pageParams
+        ? (pageParams as any)?.[segments]?.join("/") || "/"
         : "/";
-
-    // todo: we need some kind of routing system here to handle the pathname and the search params
+    pathname = pathname.startsWith("/") ? pathname : `/${pathname}`;
 
     switch (pathname) {
       case "/":
         return <div>Dashboard</div>;
+
       default:
         return <div>Dashboard {pathname}</div>;
     }
