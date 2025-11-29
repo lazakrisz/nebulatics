@@ -66,13 +66,11 @@ export function DashboardPage({
 
     const pageParams = (await params) || {};
     const pageSearchParams = (await searchParams) || {};
-    console.log("this is the pageParams", pageParams);
     const normalizedBasePath = basePath.replace(/^\//, "");
     const pathname =
       normalizedBasePath in pageParams
         ? (pageParams as any)?.[normalizedBasePath]?.join("/") || "/"
         : "/";
-    console.log("this is the pathname", pathname);
 
     // todo: we need some kind of routing system here to handle the pathname and the search params
 
