@@ -1,6 +1,6 @@
 import { defineConfig } from "@hey-api/openapi-ts";
 
 export default defineConfig({
-  input: "http://localhost:3002/a/docs",
+  input: "./openapi.json",
   output: "src/sdk",
 });
