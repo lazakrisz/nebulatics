@@ -1,15 +1,16 @@
 import { createRouter } from "better-call";
-import { test } from "./routes/test";
 import { view } from "./routes/view";
+import { visitor } from "./routes/visitor";
 
 interface GetRouterOptions {
   basePath: string;
 }
+
 export function getRouter({ basePath }: GetRouterOptions) {
   return createRouter(
     {
       view,
-      test,
+      visitor,
     },
     { basePath },
   );
