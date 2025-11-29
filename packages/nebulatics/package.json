@@ -45,6 +45,16 @@
         "default": "./dist/dashboard/index.cjs"
       }
     },
+    "./sdk": {
+      "import": {
+        "types": "./dist/sdk/index.d.mts",
+        "default": "./dist/sdk/index.mjs"
+      },
+      "require": {
+        "types": "./dist/sdk/index.d.cts",
+        "default": "./dist/sdk/index.cjs"
+      }
+    },
     "./next": {
       "import": {
         "types": "./dist/next/index.d.mts",
