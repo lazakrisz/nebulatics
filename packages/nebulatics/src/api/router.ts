@@ -12,6 +12,12 @@ export function getRouter({ basePath }: GetRouterOptions) {
       view,
       visitor,
     },
-    { basePath },
+    {
+      basePath,
+      openapi: {
+        disabled: process.env.NODE_ENV === "production",
+        path: "/docs",
+      },
+    },
   );
 }

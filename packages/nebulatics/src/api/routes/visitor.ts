@@ -6,29 +6,66 @@ export const visitor = createEndpoint(
   {
     method: "POST",
     body: z.object({
-      vid: z.string().describe("Visitor ID"),
-      sid: z.string().describe("Session ID"),
-      ts: z
-        .number()
-        .int()
-        .positive()
-        .describe("Unix timestamp in milliseconds, Date.now()"),
-      p: z.string().describe("Page path"),
-      ua: z.string().describe("User agent"),
-      ip: z.string().describe("IP address"),
-      ref: z.string().describe("Referrer"),
-      loc: z.string().describe("Location"),
-      lng: z.string().describe("Language"),
-      tz: z.string().describe("Timezone"),
-      dev: z.string().describe("Device"),
-      os: z.string().describe("Operating system"),
+      vid: z.string(),
+      sid: z.string(),
+      ts: z.number().int().positive(),
+      p: z.string(),
+      ua: z.string(),
+      ip: z.string(),
+      ref: z.string(),
+      loc: z.string(),
+      lng: z.string(),
+      tz: z.string(),
+      dev: z.string(),
+      os: z.string(),
     }),
+    metadata: {
+      openapi: {
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  vid: { type: "string" },
+                  sid: { type: "string" },
+                  ts: { type: "number" },
+                  p: { type: "string" },
+                  ua: { type: "string" },
+                  ip: { type: "string" },
+                  ref: { type: "string" },
+                  loc: { type: "string" },
+                  lng: { type: "string" },
+                  tz: { type: "string" },
+                  dev: { type: "string" },
+                  os: { type: "string" },
+                },
+                required: [
+                  "vid",
+                  "sid",
+                  "ts",
+                  "p",
+                  "ua",
+                  "ip",
+                  "ref",
+                  "loc",
+                  "lng",
+                  "tz",
+                  "dev",
+                  "os",
+                ],
+              },
+            },
+          },
+        },
+      },
+    },
   },
   async ({ body, context, request }) => {
     const { vid, sid, ts, p, ua, ip, ref, loc, lng, tz, dev, os } = body;
 
     // TODO: Implement visitor logic
-    
+
     return {};
   },
 );
