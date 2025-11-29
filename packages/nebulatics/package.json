@@ -34,6 +34,16 @@
         "types": "./dist/dashboard/index.d.cts",
         "default": "./dist/dashboard/index.cjs"
       }
+    },
+    "./next": {
+      "import": {
+        "types": "./dist/next/index.d.mts",
+        "default": "./dist/next/index.mjs"
+      },
+      "require": {
+        "types": "./dist/next/index.d.cts",
+        "default": "./dist/next/index.cjs"
+      }
     }
   },
   "scripts": {

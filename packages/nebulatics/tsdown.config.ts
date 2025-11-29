@@ -24,6 +24,11 @@ export default defineConfig([
     entry: ["src/dashboard/index.ts"],
     outDir: "dist/dashboard",
     external: [/^next/, /^react/],
-    platform: "neutral",
+  },
+  {
+    ...baseConfig,
+    entry: ["src/next/index.ts"],
+    outDir: "dist/next",
+    external: [/^next/, /^react/],
   },
 ]);
