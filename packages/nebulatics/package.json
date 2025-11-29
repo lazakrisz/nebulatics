@@ -41,7 +41,9 @@
     "dev": "tsdown --watch ./src"
   },
   "dependencies": {
+    "client-only": "^0.0.1",
     "fumadb": "^0.2.1",
+    "server-only": "^0.0.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {

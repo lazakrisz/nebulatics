@@ -13,6 +13,24 @@ export default {
   bracketSpacing: true,
   bracketSameLine: false,
   tailwindFunctions: ["cn"],
+  importOrder: [
+    //
+    "^server-only$",
+    "^client-only$",
+    "<THIRD_PARTY_MODULES>",
+    "^@[^/]+/(.*)$",
+    "^@/(.*)$",
+    "<BUILTIN_MODULES>",
+    "^[./]",
+  ],
+  importOrderParserPlugins: [
+    //
+    "typescript",
+    "jsx",
+    "decorators-legacy",
+  ],
+  importOrderTypeScriptVersion: "5.0.0",
+  importOrderCaseSensitive: false,
   customFunctions: [
     //
     "cn",
@@ -32,10 +50,11 @@ export default {
     "prettier-plugin-packagejson",
     "@xeonlink/prettier-plugin-organize-attributes",
     "prettier-plugin-multiline-arrays",
-    "prettier-plugin-organize-imports",
-    "prettier-plugin-brace-style",
     "prettier-plugin-tailwindcss",
+    "prettier-plugin-brace-style",
     "prettier-plugin-classnames",
+    // "prettier-plugin-organize-imports",
+    "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-merge",
   ],
 };
