@@ -2,8 +2,7 @@
   "compilerOptions": {
     "lib": ["ES2015", "DOM", "DOM.Iterable"],
     "outDir": "./dist",
-    "rootDir": "./src",
-    "plugins": [{ "name": "next" }]
+    "rootDir": "./src"
   },
   "exclude": ["node_modules", "dist"],
   "extends": "@nebulatics/typescript-config/react-library.json",

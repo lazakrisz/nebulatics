@@ -8,7 +8,18 @@ interface Authentication {
 }
 
 interface DashboardPageProps {
+  /**
+   * The authentication function to call to check if the user is authenticated.
+   *
+   * @default undefined
+   */
   authentication?: Authentication;
+  /**
+   * The base path of the dashboard page.
+   *
+   * @default "/backstage"
+   */
+  basePath?: string;
 }
 
 interface SearchParams {
@@ -24,10 +35,14 @@ interface DashboardPageComponentProps {
  * Nebulatics' Dashboard component.
  *
  * @param props - Configuration for the dashboard page. Including an optional
- *   authentication function, which will be called to check if the user is authenticated.
+ *   authentication function, which will be called to check if the user is
+ *   authenticated.
  * @returns A React Server Component that will render the dashboard page.
  */
-export function DashboardPage({ authentication }: DashboardPageProps) {
+export function DashboardPage({
+  authentication,
+  basePath = "/backstage",
+}: DashboardPageProps) {
   // A curried function that will return the actual dashboard page.
   return async function DashboardPageComponent({
     params,
@@ -49,9 +64,23 @@ export function DashboardPage({ authentication }: DashboardPageProps) {
       }
     }
 
-    const pageParams = await params;
-    const pageSearchParams = await searchParams;
+    const pageParams = (await params) || {};
+    const pageSearchParams = (await searchParams) || {};
+    console.log("this is the pageParams", pageParams);
+    const normalizedBasePath = basePath.replace(/^\//, "");
+    const pathname =
+      normalizedBasePath in pageParams
+        ? (pageParams as any)?.[normalizedBasePath]?.join("/") || "/"
+        : "/";
+    console.log("this is the pathname", pathname);
 
-    return <div>Dashboard</div>;
+    // todo: we need some kind of routing system here to handle the pathname and the search params
+
+    switch (pathname) {
+      case "/":
+        return <div>Dashboard</div>;
+      default:
+        return <div>Dashboard {pathname}</div>;
+    }
   };
 }
