@@ -1,0 +1,16 @@
+{
+  "name": "@nebulatics/shared",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch ./src"
+  },
+  "devDependencies": {
+    "@nebulatics/typescript-config": "workspace:*",
+    "@swc/core": "^1.15.3",
+    "tsdown": "^0.16.8",
+    "typescript": "5.9.2",
+    "unplugin-swc": "^1.5.9"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+  "extends": "@nebulatics/typescript-config/base.json",
+  "include": [
+    "src"
+  ]
+}
