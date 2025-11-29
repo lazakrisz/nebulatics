@@ -48,6 +48,7 @@ export default {
   plugins: [
     "prettier-plugin-sort-json",
     "prettier-plugin-packagejson",
+    "prettier-plugin-jsdoc",
     "@xeonlink/prettier-plugin-organize-attributes",
     "prettier-plugin-multiline-arrays",
     "prettier-plugin-tailwindcss",
