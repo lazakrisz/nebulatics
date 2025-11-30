@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "flags": "^4.0.2",
     "nebulatics": "workspace:*",
     "next": "^16.0.1",
     "react": "^19.2.0",

@@ -36,4 +36,15 @@ export default defineConfig([
     entry: ["src/sdk/index.ts"],
     outDir: "dist/sdk",
   },
+  {
+    ...baseConfig,
+    entry: ["src/client/index.ts"],
+    outDir: "dist/client",
+  },
+  {
+    ...baseConfig,
+    entry: ["src/server/index.ts"],
+    outDir: "dist/server",
+    external: [/^next/, /^react/],
+  },
 ]);
