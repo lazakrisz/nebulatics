@@ -1,6 +1,6 @@
 import "client-only";
 import { isDevelopment, merge } from "@nebulatics/shared";
-import { Events, TrackData, TrackFlags } from "../types";
+import { Events, KnownPayload, TrackData, TrackFlags } from "../types";
 import { getAllFlagValues } from "./flags";
 
 let initialized = false;
@@ -41,6 +41,18 @@ export function createClient(options: ClientOptions = {}) {
 
   const sessionId = getSessionId();
 
+  function getPayload(
+    eventName: Events,
+    data?: TrackData,
+    flags?: TrackFlags,
+  ): KnownPayload {
+    return {
+      e: eventName,
+      data,
+      flags,
+    };
+  }
+
   async function sendRequest(
     eventName: Events,
     data?: TrackData,
@@ -59,15 +71,12 @@ export function createClient(options: ClientOptions = {}) {
 
     const mergedFlags = flagValues != null ? merge(flagValues, flags) : flags;
 
-    await fetch(`${basePath}/track`, {
+    const payload = getPayload(eventName, data, mergedFlags);
+
+    await fetch(`${basePath}/e`, {
       method: "POST",
       keepalive: true,
-      // todo: think about this body, it should be a more structured object
-      body: JSON.stringify({
-        event: eventName,
-        data,
-        ...(mergedFlags != null ? { flags: mergedFlags } : {}),
-      }),
+      body: JSON.stringify(payload),
       headers: {
         "content-type": "application/json",
         // todo: think about this session id
@@ -84,7 +93,9 @@ export function createClient(options: ClientOptions = {}) {
   }
 
   async function sendIdentifyRequest(userId: string) {
-    await fetch(`${basePath}/identify`, {
+    const payload = getPayload("identify", { userId });
+
+    await fetch(`${basePath}/e`, {
       method: "POST",
       keepalive: true,
       body: JSON.stringify({
