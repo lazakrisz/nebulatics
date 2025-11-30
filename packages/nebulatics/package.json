@@ -90,6 +90,7 @@
     "openapi-ts": "openapi-ts"
   },
   "dependencies": {
+    "@nebulatics/shared": "workspace:*",
     "better-call": "^1.1.3",
     "client-only": "^0.0.1",
     "fumadb": "^0.2.1",
