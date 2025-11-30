@@ -3,6 +3,8 @@ import { isDevelopment, merge } from "@nebulatics/shared";
 import { EventName, TrackData, TrackFlags } from "../types";
 import { getAllFlagValues } from "./flags";
 
+let initialized = false;
+
 function getSessionId() {
   const sessionId = sessionStorage.getItem("sessionId");
   if (sessionId) {
@@ -12,6 +14,19 @@ function getSessionId() {
   const newSessionId = crypto.randomUUID();
   sessionStorage.setItem("sessionId", newSessionId);
   return newSessionId;
+}
+
+function initialize() {
+  const { location, navigator, screen, history, top } = window;
+  const { doNotTrack, userAgent, platform, language } = navigator;
+
+  if (initialized) {
+    return;
+  }
+
+  
+
+  initialized = true;
 }
 
 interface ClientOptions {
