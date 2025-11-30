@@ -20,10 +20,12 @@ const ThemeImage = (props: Props) => {
 };
 
 export default async function Home() {
-  await track({name: ""});
+  await track({ event: "page_view" });
 
   const revalidate = async () => {
     "use server";
+
+    await track({ event: "click", data: { price: 100 } });
 
     revalidatePath("/");
   };

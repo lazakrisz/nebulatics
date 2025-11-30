@@ -14,7 +14,18 @@ function getSessionId() {
   return newSessionId;
 }
 
-export function createClient() {
+interface ClientOptions {
+  /**
+   * The base path for the API.
+   *
+   * @default "/a"
+   */
+  basePath?: string;
+}
+
+export function createClient(options: ClientOptions = {}) {
+  const { basePath = "/a" } = options;
+
   const sessionId = getSessionId();
 
   async function sendRequest(
@@ -35,7 +46,7 @@ export function createClient() {
 
     const mergedFlags = flagValues != null ? merge(flagValues, flags) : flags;
 
-    await fetch("/api/track", {
+    await fetch(`${basePath}/track`, {
       method: "POST",
       keepalive: true,
       // todo: think about this body, it should be a more structured object
@@ -50,6 +61,32 @@ export function createClient() {
         "x-session-id": sessionId,
       },
       credentials: "include",
+    }).catch((error) => {
+      if (isDevelopment()) {
+        console.error(
+          `[Nebulatics] Failed to send track event. ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+    });
+  }
+
+  async function sendIdentifyRequest(userId: string) {
+    await fetch(`${basePath}/identify`, {
+      method: "POST",
+      keepalive: true,
+      body: JSON.stringify({
+        userId,
+      }),
+      headers: {
+        "content-type": "application/json",
+      },
+      credentials: "include",
+    }).catch((error) => {
+      if (isDevelopment()) {
+        console.error(
+          `[Nebulatics] Failed to send identify request. ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
     });
   }
 
@@ -57,6 +94,8 @@ export function createClient() {
     track(eventName: EventName) {
       return sendRequest(eventName);
     },
-    identify(userId: string) {},
+    identify(userId: string) {
+      return sendIdentifyRequest(userId);
+    },
   };
 }

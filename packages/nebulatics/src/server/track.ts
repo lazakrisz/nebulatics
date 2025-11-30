@@ -2,11 +2,12 @@ import "server-only";
 import { workAsyncStorage } from "next/dist/server/app-render/work-async-storage.external";
 import { workUnitAsyncStorage } from "next/dist/server/app-render/work-unit-async-storage.external";
 import { after, connection } from "next/server";
+import { isDevelopment } from "@nebulatics/shared";
 import { EventName, TrackData, TrackFlags } from "../types";
 
 interface TrackOptions {
   /** The name of the event to track. */
-  name: EventName | string;
+  event: keyof typeof EventName | (string & {});
   /** The data to track, this needs to be a JSON serializable object. */
   data?: TrackData;
   /** The flags to track, from the flags package. */
@@ -36,8 +37,11 @@ export async function track(options: TrackOptions): Promise<void> {
     // log or something
     return;
   }
-  console.log("type: ", workUnitStore.type);
-  console.log("store: ", JSON.stringify(store));
+
+  if (isDevelopment()) {
+    console.log("type: ", workUnitStore.type);
+    console.log("store: ", JSON.stringify(store));
+  }
 
   if (workUnitStore.type === "request") {
     after(() => {

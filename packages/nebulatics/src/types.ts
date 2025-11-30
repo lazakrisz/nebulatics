@@ -1,9 +1,9 @@
 /** Built-in event names. */
 export const enum EventName {
-  PAGE_VIEW = "page_view",
-  CLICK = "click",
-  FORM_SUBMIT = "form_submit",
-  VIEW = "view",
+  page_view = "page_view",
+  click = "click",
+  form_submit = "form_submit",
+  view = "view",
 }
 
 export interface TrackData {

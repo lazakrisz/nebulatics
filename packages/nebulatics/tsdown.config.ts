@@ -38,6 +38,11 @@ export default defineConfig([
   },
   {
     ...baseConfig,
+    entry: ["src/client/index.ts"],
+    outDir: "dist/client",
+  },
+  {
+    ...baseConfig,
     entry: ["src/server/index.ts"],
     outDir: "dist/server",
     external: [/^next/, /^react/],
