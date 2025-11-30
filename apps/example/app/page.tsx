@@ -1,4 +1,4 @@
-import { testing } from "nebulatics/server";
+import { track } from "nebulatics/server";
 import { revalidatePath } from "next/cache";
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
@@ -19,8 +19,8 @@ const ThemeImage = (props: Props) => {
   );
 };
 
-export default function Home() {
-  testing();
+export default async function Home() {
+  await track({name: ""});
 
   const revalidate = async () => {
     "use server";
