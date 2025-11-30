@@ -20,6 +20,13 @@ interface DashboardPageProps {
    * @default "/backstage"
    */
   basePath?: string;
+
+  /**
+   * The name of the segment to use for the dashboard page.
+   *
+   * @default "segments"
+   */
+  segmentName?: string;
 }
 
 interface SearchParams {
@@ -42,6 +49,7 @@ interface DashboardPageComponentProps {
 export function DashboardPage({
   authentication,
   basePath = "/backstage",
+  segmentName = "segments",
 }: DashboardPageProps) {
   // A curried function that will return the actual dashboard page.
   return async function DashboardPageComponent({
@@ -67,10 +75,9 @@ export function DashboardPage({
     const pageParams = (await params) || {};
     const pageSearchParams = (await searchParams) || {};
     const normalizedBasePath = basePath.replace(/^\//, "");
-    const segments = "segments";
     let pathname =
-      segments in pageParams
-        ? (pageParams as any)?.[segments]?.join("/") || "/"
+      segmentName in pageParams
+        ? (pageParams as any)?.[segmentName]?.join("/") || "/"
         : "/";
     pathname = pathname.startsWith("/") ? pathname : `/${pathname}`;
 
