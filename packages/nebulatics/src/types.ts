@@ -6,6 +6,8 @@ export const enum EventName {
   view = "view",
 }
 
+export type Events = keyof typeof EventName | (string & {});
+
 export interface TrackData {
   [key: string]: string | number | boolean | null | undefined;
 }

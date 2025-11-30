@@ -3,11 +3,11 @@ import { workAsyncStorage } from "next/dist/server/app-render/work-async-storage
 import { workUnitAsyncStorage } from "next/dist/server/app-render/work-unit-async-storage.external";
 import { after, connection } from "next/server";
 import { isDevelopment } from "@nebulatics/shared";
-import { EventName, TrackData, TrackFlags } from "../types";
+import { Events, TrackData, TrackFlags } from "../types";
 
 interface TrackOptions {
   /** The name of the event to track. */
-  event: keyof typeof EventName | (string & {});
+  event: Events;
   /** The data to track, this needs to be a JSON serializable object. */
   data?: TrackData;
   /** The flags to track, from the flags package. */

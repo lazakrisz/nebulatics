@@ -1,6 +1,6 @@
 import "client-only";
 import { isDevelopment, merge } from "@nebulatics/shared";
-import { EventName, TrackData, TrackFlags } from "../types";
+import { Events, TrackData, TrackFlags } from "../types";
 import { getAllFlagValues } from "./flags";
 
 let initialized = false;
@@ -24,8 +24,6 @@ function initialize() {
     return;
   }
 
-  
-
   initialized = true;
 }
 
@@ -44,7 +42,7 @@ export function createClient(options: ClientOptions = {}) {
   const sessionId = getSessionId();
 
   async function sendRequest(
-    eventName: EventName,
+    eventName: Events,
     data?: TrackData,
     flags?: TrackFlags,
   ) {
@@ -106,7 +104,7 @@ export function createClient(options: ClientOptions = {}) {
   }
 
   return {
-    track(eventName: EventName) {
+    track(eventName: Events) {
       return sendRequest(eventName);
     },
     identify(userId: string) {
