@@ -1,1 +1,1 @@
-export {};
+export { init } from "./common";
