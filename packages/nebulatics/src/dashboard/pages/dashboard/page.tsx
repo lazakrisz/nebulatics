@@ -1,7 +1,7 @@
 import { getURLFromRedirectError } from "next/dist/client/components/redirect";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { redirect } from "next/navigation";
-import { connection } from "next/server";
+import { connection, NextResponse } from "next/server";
 
 interface Authentication {
   (): Promise<void>;
@@ -20,6 +20,13 @@ interface DashboardPageProps {
    * @default "/backstage"
    */
   basePath?: string;
+
+  /**
+   * The name of the segment to use for the dashboard page.
+   *
+   * @default "segments"
+   */
+  segmentName?: string;
 }
 
 interface SearchParams {
@@ -42,6 +49,7 @@ interface DashboardPageComponentProps {
 export function DashboardPage({
   authentication,
   basePath = "/backstage",
+  segmentName = "segments",
 }: DashboardPageProps) {
   // A curried function that will return the actual dashboard page.
   return async function DashboardPageComponent({
@@ -67,16 +75,16 @@ export function DashboardPage({
     const pageParams = (await params) || {};
     const pageSearchParams = (await searchParams) || {};
     const normalizedBasePath = basePath.replace(/^\//, "");
-    const pathname =
-      normalizedBasePath in pageParams
-        ? (pageParams as any)?.[normalizedBasePath]?.join("/") || "/"
+    let pathname =
+      segmentName in pageParams
+        ? (pageParams as any)?.[segmentName]?.join("/") || "/"
         : "/";
-
-    // todo: we need some kind of routing system here to handle the pathname and the search params
+    pathname = pathname.startsWith("/") ? pathname : `/${pathname}`;
 
     switch (pathname) {
       case "/":
         return <div>Dashboard</div>;
+
       default:
         return <div>Dashboard {pathname}</div>;
     }
