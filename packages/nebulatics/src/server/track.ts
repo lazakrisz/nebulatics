@@ -2,26 +2,11 @@ import "server-only";
 import { workAsyncStorage } from "next/dist/server/app-render/work-async-storage.external";
 import { workUnitAsyncStorage } from "next/dist/server/app-render/work-unit-async-storage.external";
 import { after, connection } from "next/server";
+import { EventName, TrackData, TrackFlags } from "../types";
 
-interface TrackData {
-  [key: string]: string | number | boolean | null | undefined;
-}
-
-interface TrackFlags {
-  [key: string]:
-    | string
-    | Record<string, string | number | boolean | null | undefined | unknown>
-    | number
-    | boolean
-    | null
-    | undefined
-    | unknown;
-}
-
-// TODO: the name should be a union + string for custom type
 interface TrackOptions {
   /** The name of the event to track. */
-  name: string;
+  name: EventName | string;
   /** The data to track, this needs to be a JSON serializable object. */
   data?: TrackData;
   /** The flags to track, from the flags package. */

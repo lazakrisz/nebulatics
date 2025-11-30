@@ -73,21 +73,14 @@
       "require": {
         "types": "./dist/server/index.d.cts",
         "default": "./dist/server/index.cjs"
-      },
-      "node": {
-        "types": "./dist/server/index.d.cts",
-        "default": "./dist/server/index.cjs"
-      },
-      "default": {
-        "types": "./dist/server/index.d.cts",
-        "default": "./dist/server/index.cjs"
       }
     }
   },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch ./src",
-    "openapi-ts": "openapi-ts"
+    "openapi-ts": "openapi-ts",
+    "test": "vitest"
   },
   "dependencies": {
     "@nebulatics/shared": "workspace:*",
@@ -101,8 +94,10 @@
     "@hey-api/openapi-ts": "^0.88.0",
     "@nebulatics/typescript-config": "workspace:*",
     "@types/react": "^19.2.7",
+    "happy-dom": "^20.0.11",
     "tsdown": "^0.16.8",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^4.0.14"
   },
   "peerDependencies": {
     "next": "^14.0.0 || ^15.0.0 || ^16.0.0",
