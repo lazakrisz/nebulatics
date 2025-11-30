@@ -1,4 +1,9 @@
 {
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
   "exclude": [
     "dist",
     "build",
