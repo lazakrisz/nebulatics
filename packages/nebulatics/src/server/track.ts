@@ -10,11 +10,12 @@ interface TrackData {
 interface TrackFlags {
   [key: string]:
     | string
-    | Record<string, string | number | boolean | null | undefined>
+    | Record<string, string | number | boolean | null | undefined | unknown>
     | number
     | boolean
     | null
-    | undefined;
+    | undefined
+    | unknown;
 }
 
 // TODO: the name should be a union + string for custom type
